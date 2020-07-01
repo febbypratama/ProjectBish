@@ -1,35 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@febbypratama 
-febbypratama
-/
-One4uBot-1
-forked from MoveAngel/One4uBot
-0
-0193
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-One4uBot-1/userbot/modules/stickers.py /
-@febbypratama
-febbypratama Update stickers.py
-Latest commit 6455850 13 days ago
- History
- 17 contributors
-@AvinashReddy3108@SpEcHiDe@Muttahir786@shxnpie@zakaryan2004@yshalsager@raphielscape@MoveAngel@baalajimaestro@febbypratama@Prakasaka@jaskaranSM
-348 lines (316 sloc)  14 KB
-  
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
 # Licensed under the Raphielscape Public License, Version 1.d (the "License");
@@ -51,12 +19,11 @@ from telethon.tl.types import InputStickerSetID
 from telethon.tl.types import DocumentAttributeSticker
 
 KANGING_STR = [
-    "AMBIL AJA LAH",
-  
-]
+    "Ter-curi",
+   ]
 
 
-@register(outgoing=True, pattern="^.curi")
+@register(outgoing=True, pattern="^\.curi")
 async def kang(args):
     """ For .kang command, kangs stickers or creates new ones. """
     user = await bot.get_me()
@@ -80,7 +47,8 @@ async def kang(args):
             if (DocumentAttributeFilename(file_name='sticker.webp') in
                     message.media.document.attributes):
                 emoji = message.media.document.attributes[1].alt
-                emojibypass = True
+                if emoji != '':
+                    emojibypass = True
         elif "tgsticker" in message.media.document.mime_type:
             await args.edit(f"`{random.choice(KANGING_STR)}`")
             await bot.download_file(message.media.document,
@@ -261,7 +229,7 @@ async def kang(args):
                 await bot.send_read_acknowledge(conv.chat_id)
 
         await args.edit(f"\
-            [DISINI](t.me/addstickers/{packname})",
+            [HASIL CURIAN DISINI COK!](t.me/addstickers/{packname})",
                         parse_mode='md')
 
 
@@ -290,7 +258,7 @@ async def resize_photo(photo):
     return image
 
 
-@register(outgoing=True, pattern="^.stkrinfo$")
+@register(outgoing=True, pattern="^\.stkrinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
         await event.edit("`I can't fetch info from nothing, can I ?!`")
@@ -331,9 +299,9 @@ async def get_pack_info(event):
         f"**Emojis In Pack:**\n{' '.join(pack_emojis)}"
 
     await event.edit(OUTPUT)
-
-
-@register(outgoing=True, pattern="^.getsticker$")
+    
+    
+@register(outgoing=True, pattern="^\.get$")
 async def sticker_to_png(sticker):
     if not sticker.is_reply:
         await sticker.edit("`NULL information to fetch...`")
@@ -357,7 +325,7 @@ async def sticker_to_png(sticker):
         try:
             await img.reply(file=image, force_document=True)
         except Exception:
-            await sticker.edit("`Error, can't send file...`")
+            await sticker.edit("`Err, can't send file...`")
         else:
             await sticker.delete()
     return
@@ -365,28 +333,14 @@ async def sticker_to_png(sticker):
 
 CMD_HELP.update({
     "stickers":
-    ".kang\
-\nUsage: Reply .kang to a sticker or an image to kang it to your userbot pack.\
-\n\n.kang [emoji('s)]\
-\nUsage: Works just like .kang but uses the emoji('s) you picked.\
-\n\n.kang [number]\
-\nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
-\n\n.kang [emoji('s)] [number]\
-\nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
-\n\n.stkrinfo\
-\nUsage: Gets info about the sticker pack.\
-\n\n.getsticker\
-\nUsage: reply to a sticker to get 'PNG' file of sticker."
+    ">`.curry [emoji('s)]?`"
+    "\nUsage: Reply .kang to a sticker or an image to kang it to your userbot pack "
+    "\nor specify the emoji you want to."
+    "\n\n>`.curry (emoji['s]]?` [number]?"
+    "\nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji "
+    "or choose the emoji you want to."
+    "\n\n>`.stkrinfo`"
+    "\nUsage: Gets info about the sticker pack."
+    "\n\n>`.get`"
+    "\nUsage: reply to a sticker to get 'PNG' file of sticker."
 })
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
