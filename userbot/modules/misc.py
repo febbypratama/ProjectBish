@@ -99,7 +99,7 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     await wannasee.edit(
-        "[Click Here](https://github.com/adekmaulana/ProjectBish) to see ProjectBish Official Repo.\n[Click Here](https://github.com/BianSepang/ProjectBish) to see My Forked Repo"
+        "[Click Here]https://github.com/febbypratama/kangproject) to see Illuminate Kangproject Repo's"
     )
 
 
